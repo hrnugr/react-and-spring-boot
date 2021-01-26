@@ -1,0 +1,20 @@
+spring:
+  resources:
+    add-mappings : true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tour
+    username: postgres
+    password: admin
+    configuration:
+      maximum-pool : 30
+  jpa:
+    hibernate:
+      default_schema: tour
+      ddl-auto: update
+    generate-ddl : true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
