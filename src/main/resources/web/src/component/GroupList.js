@@ -12,7 +12,6 @@ class GroupList extends Component {
     this.remove = this.remove.bind(this);
   }
 
-
   async componentDidMount() {
     this.setState({isLoading: true});
 

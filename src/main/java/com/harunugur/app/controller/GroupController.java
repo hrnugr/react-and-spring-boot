@@ -40,7 +40,7 @@ public class GroupController {
         return new ResponseEntity<Group>(group,HttpStatus.OK);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/group/create")
     public ResponseEntity<?> create(@Valid @RequestBody Group group) throws URISyntaxException {
         log.info("Request to create group: {}", group);
         Group result = groupService.create(group);
@@ -48,7 +48,7 @@ public class GroupController {
                 .body(result);
     }
 
-    @PutMapping("/update")
+    @PutMapping("/group/update")
     public ResponseEntity<?> update(@Valid @RequestBody Group group){
         log.info("Request to update group: {}", group);
         Group result = groupService.create(group);
