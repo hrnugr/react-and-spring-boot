@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,6 +27,7 @@ public class GroupController {
     }
 
     @GetMapping("/groups")
+    @Transactional(timeout = 10)
     public ResponseEntity<List<Group>> getAllGroups() {
         log.info("Request to get groups");
         List<Group> groups = groupService.getAllGroups();

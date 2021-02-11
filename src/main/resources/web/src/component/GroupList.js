@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Container, Table, Spinner, Row, Col} from 'reactstrap';
+import { Button, ButtonGroup, Container, Table, Spinner, Row, Col, Alert} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -8,7 +8,12 @@ class GroupList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {groups: [], isLoading: true};
+    this.state = {
+      groups: [], 
+      isLoading: true,
+      errorMsg: null,
+      isError: false
+    };
     this.remove = this.remove.bind(this);
   }
 
@@ -19,7 +24,12 @@ class GroupList extends Component {
       console.log(res.data);
       this.setState({groups: res.data,isLoading: false});
     }).catch(error => {
-      console.log(error);
+      this.setState({
+        isError: true,
+        isLoading: false,
+        errorMsg: error.message
+      });
+      console.log(error.data);
     });
   }
 
@@ -37,7 +47,8 @@ class GroupList extends Component {
   }
 
   render() {
-    const {groups, isLoading} = this.state;
+    const {groups, isLoading, isError, errorMsg} = this.state;
+
 
     if (isLoading) {
       return (
@@ -49,6 +60,10 @@ class GroupList extends Component {
           </Row>
         </Container>
       );
+    }
+
+    if (isError) {
+      return <Alert color="danger">{errorMsg}</Alert>
     }
 
     const groupList = groups.map(group => {

@@ -18,3 +18,9 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+  application:
+    name: tour
+logging:
+  level.: debug
+  logging:
+    file=${java.io.tmpdir}/${spring.aplication.name}.log
